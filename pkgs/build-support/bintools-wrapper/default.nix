@@ -92,6 +92,7 @@ let
   # TODO(@Ericson2314) Make unconditional, or optional but always true by
   # default.
   targetPrefix = optionalString (targetPlatform != hostPlatform) (targetPlatform.config + "-");
+
   exeSuffix = stdenvNoCC.hostPlatform.extensions.executable;
 
   bintoolsVersion = getVersion bintools;
@@ -271,7 +272,16 @@ stdenvNoCC.mkDerivation {
       basename=$(basename "${if exeSuffix != "" then "\${variant%${exeSuffix}}" else "$variant"}")
       wrap $basename ${./ld-wrapper.sh} $variant
     done
+  ''
+
+  # targetPlatform and hostPlatform have the same config (e.g. differ only in isStatic),
+  # so also create unprefixed symlinks for native toolchain compatibility
+  + optionalString (targetPlatform.config == hostPlatform.config && targetPlatform != hostPlatform) ''
+    for f in $out/bin/${targetPrefix}*; do
+      ln -s "$f" "$out/bin/''${f##*${targetPrefix}}" 2>/dev/null || true
+    done
   '';
+
 
   strictDeps = true;
   depsTargetTargetPropagated = extraPackages;
