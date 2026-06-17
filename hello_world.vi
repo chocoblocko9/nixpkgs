@@ -1,0 +1,5 @@
+// hello_world.vi
+
+pub fn main(&io: &IO) {
+  io.println("Hello, world!");
+}
