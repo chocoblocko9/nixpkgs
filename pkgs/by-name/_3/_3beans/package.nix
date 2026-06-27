@@ -29,6 +29,7 @@ stdenv.mkDerivation (finalAttrs: {
     wxwidgets_3_3
     wrapGAppsHook3
   ];
+
   buildInputs = [
     libepoxy
     portaudio

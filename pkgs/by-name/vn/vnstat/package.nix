@@ -8,6 +8,9 @@
   sqlite,
   check,
   nixosTests,
+
+  formats,
+  coreutils,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -41,7 +44,18 @@ stdenv.mkDerivation (finalAttrs: {
 
   doCheck = true;
 
-  passthru.tests = { inherit (nixosTests) vnstat; };
+  passthru = {
+    tests = { inherit (nixosTests) vnstat; };
+    services.default = {
+      imports = [
+        (lib.modules.importApply ./service.nix {
+          inherit formats coreutils;
+        })
+      ];
+
+    vnstat.package = lib.mkDefault finalAttrs.finalPackage;
+    };
+  };
 
   meta = {
     description = "Console-based network statistics utility for Linux";
