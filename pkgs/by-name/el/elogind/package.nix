@@ -129,6 +129,7 @@ stdenv.mkDerivation (finalAttrs: {
     (lib.mesonOption "reboot-path" "${system}/bin/reboot")
     (lib.mesonBool "utmp" (!stdenv.hostPlatform.isMusl))
     (lib.mesonEnable "xenctrl" false)
+    "-Dc_args=-Wno-error=override-init"
   ];
 
   meta = {
