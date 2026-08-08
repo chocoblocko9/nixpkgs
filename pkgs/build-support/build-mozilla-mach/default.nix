@@ -351,7 +351,6 @@ buildStdenv.mkDerivation {
       ./firefox-152-missing-cstdint-include.patch
       ./mallinfo.patch
       ./rust-lto-thin.patch
-      ./single-threaded-header.patch
     ]
     ++ extraPatches;
 
