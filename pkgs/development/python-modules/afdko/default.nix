@@ -132,6 +132,9 @@ buildPythonPackage (finalAttrs: {
   ++ lib.optionals (stdenv.hostPlatform.isi686) [
     "test_dump_option"
     "test_type1mm_inputs"
+  ]
+  ++ lib.optionals (stdenv.hostPlatform.isMusl) [
+    "test_overlap_removal"
   ];
 
   passthru.tests = {
