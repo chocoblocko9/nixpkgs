@@ -348,7 +348,6 @@ buildStdenv.mkDerivation {
     ++ lib.optionals (stdenv.hostPlatform.isMusl) [
       ./firefox-146-musl-linux-sys-prctl-conflict.patch
       ./firefox-148-mach-clobber.patch
-      ./firefox-148-webrtc-missing-includes.patch
       ./firefox-152-missing-cstdint-include.patch
       ./mallinfo.patch
       ./rust-lto-thin.patch
