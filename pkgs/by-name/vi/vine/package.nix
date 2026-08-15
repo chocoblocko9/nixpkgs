@@ -30,7 +30,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   meta = {
     description = "Experimental new programming language based on interaction nets";
     homepage = "https://github.com/VineLang/vine";
-    # changelog = "https://github.com/ownself/wewa/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ choco98 ];
